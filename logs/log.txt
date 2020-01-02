@@ -52,3 +52,26 @@ El día 02-01-2020 a las 12:38:08: Acceso sin subida de archivo del user admin
 El día 02-01-2020 a las 12:39:03: Acceso sin subida de archivo del user admin
 El día 02-01-2020 a las 12:44:54: Se intenta un acceso sin pasar por el index
 El día 02-01-2020 a las 12:45:00: Acceso sin subida de archivo del user asad
+El día 02-01-2020 a las 13:02:22: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:02:28: El usuario asad ha intentado acceder sin seleccionar un fichero
+El día 02-01-2020 a las 13:02:37: El usuario admin ha intentado acceder y subir un fichero obreniendo el siguiente resultado: El fichero index(1).php se ha subido correctamente
+El día 02-01-2020 a las 13:03:15: Se publica index(1).php en la carpeta otros
+El día 02-01-2020 a las 13:03:52: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:04:18: El usuario andad ha intentado subir un fichero obreniendo el siguiente resultado: El fichero ce91807625abaacfec9c9b2dfbcebf41.jpg se ha subido correctamente
+El día 02-01-2020 a las 13:04:23: Se intenta un acceso sin especificar user o pass
+El día 02-01-2020 a las 13:04:27: Acceso sin subida de archivo del user admin
+El día 02-01-2020 a las 13:04:39: Se publica ce91807625abaacfec9c9b2dfbcebf41.jpg en la carpeta imagenes
+El día 02-01-2020 a las 13:04:39: Se publica Black.Mirror.S01E01.The.National.Anthem.1080p.Web-DL.ReEnc-DeeJayAhmed.srt en la carpeta otros
+El día 02-01-2020 a las 13:04:39: Se publica calendario_agenda_2019_2020_DELEGADOS.doc en la carpeta otros
+El día 02-01-2020 a las 13:04:39: Se publica ejercicios_dom_basico_repaso.odt en la carpeta otros
+El día 02-01-2020 a las 13:04:39: Se publica ejercicios_jquery_efectos_1.tar.gz en la carpeta otros
+El día 02-01-2020 a las 13:05:09: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:08:21: Acceso sin subida de archivo del user asad
+El día 02-01-2020 a las 13:10:06: Acceso sin subida de archivo del user asad
+El día 02-01-2020 a las 13:11:24: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:11:30: Acceso sin subida de archivo del user admin
+El día 02-01-2020 a las 13:16:27: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:16:43: El usuario admin ha intentado acceder y subir un fichero obreniendo el siguiente resultado: El fichero Screenshot from 2020-01-02 05-31-46.png se ha subido correctamente
+El día 02-01-2020 a las 13:17:08: Se publica Screenshot from 2020-01-02 05-31-46.png en la carpeta imagenes
+El día 02-01-2020 a las 13:21:11: Se intenta un acceso sin pasar por el index
+El día 02-01-2020 a las 13:21:40: El usuario asad ha intentado acceder y subir un fichero obreniendo el siguiente resultado: Error subiendo el fichero www.w3schools.com.rar

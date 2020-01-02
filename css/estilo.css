@@ -29,9 +29,8 @@
     font-style: oblique
 }
 .caja_centrada{
-    width:30%;
-    margin-left:30%;
-    margin-top:10%;
+    width:40%;
+    margin: 10% auto;
     background: blanchedalmond
 }
  
@@ -83,4 +82,10 @@ text-align: right;
 font-size: small;
 
 margin-bottom: 0;
+}
+
+li{
+    
+    list-style-type: none;
+    
 }
