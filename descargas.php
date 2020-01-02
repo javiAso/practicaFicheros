@@ -58,7 +58,7 @@ switch ($_POST['enviar']) {
 
         var_dump($_POST);
         if (sizeof($_POST) > 1) {
-            //mover los archivos
+            funciones::publicarArchivos($_POST);
         }
 
         $download = funciones::muestraFicherosDownload() . funciones::muestraFicherosUpload();
