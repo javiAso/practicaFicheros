@@ -76,7 +76,7 @@ class funciones {
             if (strpos(".", $dir) === 0 || strpos("..", $dir) === 0)
                 continue;
 
-            $cadena .= "<fieldset><legend >$dir</legend><ul>";
+            $cadena .= "<fieldset><legend class='legend2'>$dir</legend><ul>";
             $carpeta = scandir("descargas/downloads/$dir");
 
             foreach ($carpeta as $fichero) {
@@ -101,7 +101,7 @@ class funciones {
             if (strpos(".", $dir) === 0 || strpos("..", $dir) === 0)
                 continue;
 
-            $cadena .= "<fieldset><legend >$dir</legend>";
+            $cadena .= "<fieldset><legend class='legend2'>$dir</legend>";
             $carpeta = scandir("descargas/uploads/$dir");
 
 
@@ -136,7 +136,7 @@ class funciones {
         }
     }
 
-    public static function escribeLog($mensaje) {//Debe estar la carpeta del proyecto con los correspondientes permisos
+    public static function escribeLog($mensaje) {//Debe estar la carpeta del proyecto con los correspondientes permisos y propietarios
         $file = "./logs/log.txt";
 
         if (!file_exists("logs")) {

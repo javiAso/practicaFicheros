@@ -6,11 +6,8 @@ spl_autoload_register(function($clase) {
     require "$clase.php";
 });
 
-
 funciones::controlAcceso($_POST);
-
-$nombreUsuario = $_POST['name'];
-
+($_POST['enviar'] == 'publicar') ? $nombreUsuario = "" : $nombreUsuario = $_POST['name'];
 
 switch ($_POST['enviar']) {
 
@@ -32,8 +29,7 @@ switch ($_POST['enviar']) {
         break;
     case 'subirAcceder':
         $fichero = $_FILES['fichero'];
-        $nombreFichero = $fichero['name'];
-        if (!empty($nombreFichero)) {
+        if (!empty($fichero['name'])) {
             $subida = funciones::subir_ficheros($fichero);
             funciones::escribeLog("El usuario $nombreUsuario ha intentado acceder y subir un fichero obreniendo el siguiente resultado: $subida");
 
@@ -44,6 +40,10 @@ switch ($_POST['enviar']) {
             } else {
 
                 $download = funciones::muestraFicherosDownload();
+                if ($nombreUsuario == 'admin') {
+
+                    $download .= funciones::muestraFicherosUpload();
+                }
             }
         } else {
             funciones::escribeLog("El usuario $nombreUsuario ha intentado acceder sin seleccionar un fichero");
@@ -68,7 +68,7 @@ switch ($_POST['enviar']) {
     case 'publicar':
 
 
-        if (sizeof($_POST) > 1) {
+        if (sizeof($_POST) > 1) {//Puede ser que el admin no haya seleccionado ningún checkbox; en ese caso no llamo a la función.
             funciones::publicarArchivos($_POST);
         }
 
