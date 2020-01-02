@@ -118,6 +118,17 @@ class funciones {
 
     public static function publicarArchivos($post) {
 
+        foreach ($post as $carpeta => $ficheros) {
+
+            if ($carpeta == 'enviar') {
+                continue;
+            }
+
+            foreach ($ficheros as $fichero) {
+
+                rename("descargas/uploads/$carpeta/$fichero", "descargas/downloads/$carpeta/$fichero");
+            }
+        }
     }
 
 }
