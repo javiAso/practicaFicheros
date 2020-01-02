@@ -9,6 +9,8 @@ spl_autoload_register(function($clase) {
 
 funciones::controlAcceso($_POST);
 
+$nombreUsuario = $_POST['name'];
+
 
 switch ($_POST['enviar']) {
 
@@ -16,17 +18,25 @@ switch ($_POST['enviar']) {
         $fichero = $_FILES['fichero'];
         if (!empty($fichero['name'])) {
             $subida = funciones::subir_ficheros($fichero);
+            funciones::escribeLog("El usuario $nombreUsuario ha intentado subir un fichero obreniendo el siguiente resultado: $subida");
             header("Location:index.php?msj=$subida");
-        } else
-            header("Location:index.php?msj=Debe seleccionar un fichero");
-        exit();
+            exit();
+        } else {
 
+            funciones::escribeLog("El usuario $nombreUsuario ha intentado subir un fichero sin seleccionarlo previamente");
+            header("Location:index.php?msj=Debe seleccionar un fichero");
+
+            exit();
+        }
 
         break;
     case 'subirAcceder':
         $fichero = $_FILES['fichero'];
-        if (!empty($fichero['name'])) {
+        $nombreFichero = $fichero['name'];
+        if (!empty($nombreFichero)) {
             $subida = funciones::subir_ficheros($fichero);
+            funciones::escribeLog("El usuario $nombreUsuario ha intentado acceder y subir un fichero obreniendo el siguiente resultado: $subida");
+
             if (explode(" ", $subida)[0] == 'Error') {
 
                 header("Location:index.php?msj=$subida");
@@ -36,6 +46,7 @@ switch ($_POST['enviar']) {
                 $download = funciones::muestraFicherosDownload();
             }
         } else {
+            funciones::escribeLog("El usuario $nombreUsuario ha intentado acceder sin seleccionar un fichero");
             header("Location:index.php?msj=Debe seleccionar un fichero");
             exit();
         }
@@ -44,10 +55,10 @@ switch ($_POST['enviar']) {
         break;
     case 'acceder':
 
-
+        funciones::escribeLog("Acceso sin subida de archivo del user " . $nombreUsuario);
 
         $download = funciones::muestraFicherosDownload();
-        if ($_POST['name'] == 'admin') {
+        if ($nombreUsuario == 'admin') {
 
             $download .= funciones::muestraFicherosUpload();
         }
@@ -56,7 +67,7 @@ switch ($_POST['enviar']) {
 
     case 'publicar':
 
-        var_dump($_POST);
+
         if (sizeof($_POST) > 1) {
             funciones::publicarArchivos($_POST);
         }
