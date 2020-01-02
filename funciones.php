@@ -6,6 +6,7 @@ class funciones {
 
         if (empty($post)) {
             $msj = 'Debe acceder a descargas a traves del index :)';
+            funciones::escribeLog("Se intenta un acceso sin pasar por el index");
             header("Location:index.php?msj=$msj");
             exit();
         }
@@ -13,6 +14,7 @@ class funciones {
         if ($post['enviar'] != 'publicar') {
             if ($post['name'] === '' || $post['pass'] === '') {
                 $msj = 'Debe especificar user y pass :)';
+                funciones::escribeLog("Se intenta un acceso sin especificar user o pass");
                 header("Location:index.php?msj=$msj");
                 exit();
             }
@@ -56,9 +58,10 @@ class funciones {
 
 
 //Ahora procedemos a copiar y ver el éxito o fracaso
-        if (move_uploaded_file($origen, $destino))
+        if (move_uploaded_file($origen, $destino)) {
+
             return ("El fichero $nombreFichero se ha subido correctamente");
-        else
+        } else
             return ("Error subiendo el fichero $nombreFichero");
     }
 
@@ -126,9 +129,27 @@ class funciones {
 
             foreach ($ficheros as $fichero) {
 
-                rename("descargas/uploads/$carpeta/$fichero", "descargas/downloads/$carpeta/$fichero");
+                if (rename("descargas/uploads/$carpeta/$fichero", "descargas/downloads/$carpeta/$fichero")) {
+                    funciones::escribeLog("Se publica $fichero en la carpeta $carpeta");
+                }
             }
         }
+    }
+
+    public static function escribeLog($mensaje) {//Debe estar la carpeta del proyecto con los correspondientes permisos
+        $file = "./logs/log.txt";
+
+        if (!file_exists("logs")) {
+            mkdir("logs", 0775);
+            $msj = "Se ha creado la carpeta ficheros\n";
+            file_put_contents($file, $msj);
+        }
+
+        $fecha = date('d-m-Y', strtotime("now"));
+        $hora = date('H:i:s', strtotime("now"));
+        $log = "El día $fecha a las $hora: $mensaje\n";
+
+        file_put_contents($file, $log, FILE_APPEND); //Esta funcion, abre, escribe y cierra
     }
 
 }
