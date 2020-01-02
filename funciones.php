@@ -79,7 +79,7 @@ class funciones {
             foreach ($carpeta as $fichero) {
                 if (strpos(".", $fichero) === 0 || strpos("..", $fichero) === 0)
                     continue;
-                $cadena .= "<li><a href='#'>$fichero</a></li>";
+                $cadena .= "<li><a href='descargas/downloads/$dir/$fichero'>$fichero</a></li>";
             }
             $cadena .= "</ul></fieldset>";
         }
