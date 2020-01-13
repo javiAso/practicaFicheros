@@ -6,11 +6,10 @@ spl_autoload_register(function($clase) {
     require "$clase.php";
 });
 
-funciones::controlAcceso($_POST);
+funciones::controlAcceso($_POST); //Controlo que el acceso sea correcto
 ($_POST['enviar'] == 'publicar') ? $nombreUsuario = "" : $nombreUsuario = $_POST['name'];
 
-switch ($_POST['enviar']) {
-
+switch ($_POST['enviar']) {//Controlo el acceso desde los distintos submit
     case 'subirFichero':
         $fichero = $_FILES['fichero'];
         if (!empty($fichero['name'])) {
@@ -31,10 +30,9 @@ switch ($_POST['enviar']) {
         $fichero = $_FILES['fichero'];
         if (!empty($fichero['name'])) {
             $subida = funciones::subir_ficheros($fichero);
-            funciones::escribeLog("El usuario $nombreUsuario ha intentado acceder y subir un fichero obreniendo el siguiente resultado: $subida");
+            funciones::escribeLog("El usuario $nombreUsuario ha intentado subir un fichero y acceder obteniendo el siguiente resultado: $subida");
 
-            if (explode(" ", $subida)[0] == 'Error') {
-
+            if (explode(" ", $subida)[0] == 'Error') {//Si la funcion subir ficheros me devuelve un error mando al user al index
                 header("Location:index.php?msj=$subida");
                 exit();
             } else {

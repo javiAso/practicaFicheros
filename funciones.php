@@ -1,9 +1,8 @@
 <?php
 
-class funciones {
+class funciones { //En esta clase están todas las funciones necesarias para el funcionamiento de la aplicación:
 
-    public static function controlAcceso($post) {
-
+    public static function controlAcceso($post) {//Controla que el acceso sea a través del index e identificado
         if (empty($post)) {
             $msj = 'Debe acceder a descargas a traves del index :)';
             funciones::escribeLog("Se intenta un acceso sin pasar por el index");
@@ -11,7 +10,7 @@ class funciones {
             exit();
         }
 
-        if ($post['enviar'] != 'publicar') {
+        if ($post['enviar'] != 'publicar') {//Si no se viene de publicar, al que ya se ha tenido que acceder a traes del admin anteriormente
             if ($post['name'] === '' || $post['pass'] === '') {
                 $msj = 'Debe especificar user y pass :)';
                 funciones::escribeLog("Se intenta un acceso sin especificar user o pass");
@@ -29,7 +28,8 @@ class funciones {
         //Accedemos al nombre del fichero con el que el cliente lo subió
         $nombreFichero = $fichero['name'];
         //Comprobamos la extensión del fichero
-        $extension = end(explode(".", $nombreFichero));
+        $arraySeparado = explode(".", $nombreFichero);
+        $extension = end($arraySeparado);
         //Establecemos la ruta donde queremos dejar el fichero dependiendo de su extensión
         switch ($extension) {
             case 'pdf':
@@ -60,26 +60,26 @@ class funciones {
 //Ahora procedemos a copiar y ver el éxito o fracaso
         if (move_uploaded_file($origen, $destino)) {
 
+            funciones::escribeLog("El fichero $nombreFichero se ha subido correctamente");
             return ("El fichero $nombreFichero se ha subido correctamente");
         } else
-            return ("Error subiendo el fichero $nombreFichero");
+            funciones::escribeLog("Error subiendo el fichero $nombreFichero");
+        return ("Error subiendo el fichero $nombreFichero");
     }
 
-    public static function muestraFicherosDownload() {
-
+    public static function muestraFicherosDownload() {//Crea una cadena HTML con el contenido de la carpeta Downloads
         $cadena = "<fieldset class='caja_centrada'><legend>ficheros listos para descargar</legend>";
 
         $ficheros = scandir("descargas/downloads");
 
-        foreach ($ficheros as $dir) {
-
+        foreach ($ficheros as $dir) {//Recorro las carpetas
             if (strpos(".", $dir) === 0 || strpos("..", $dir) === 0)
                 continue;
 
             $cadena .= "<fieldset><legend class='legend2'>$dir</legend><ul>";
             $carpeta = scandir("descargas/downloads/$dir");
 
-            foreach ($carpeta as $fichero) {
+            foreach ($carpeta as $fichero) {//Recorro los ficheros
                 if (strpos(".", $fichero) === 0 || strpos("..", $fichero) === 0)
                     continue;
                 $cadena .= "<li><a href='descargas/downloads/$dir/$fichero'>$fichero</a></li>";
@@ -90,8 +90,7 @@ class funciones {
         return $cadena;
     }
 
-    public static function muestraFicherosUpload() {
-
+    public static function muestraFicherosUpload() {//Crea una cadena HTML con el contenido de la carpeta Downloads eun un formulario
         $cadena = "<fieldset class='caja_centrada'><legend>ficheros pendientes de revisión</legend><form action='descargas.php' method='POST'>";
 
         $ficheros = scandir("descargas/uploads");
@@ -109,7 +108,7 @@ class funciones {
                 if (strpos(".", $fichero) === 0 || strpos("..", $fichero) === 0)
                     continue;
 
-                $name = $dir . '[]';
+                $name = $dir . '[]'; //Para mandar los ficheros como un array (Se manda un array por carpeta)
 
                 $cadena .= " <label><input type='checkbox' name='$name' value='$fichero'> $fichero</label><br>";
             }
@@ -119,18 +118,17 @@ class funciones {
         return $cadena;
     }
 
-    public static function publicarArchivos($post) {
-
-        foreach ($post as $carpeta => $ficheros) {
-
-            if ($carpeta == 'enviar') {
+    public static function publicarArchivos($post) {//Cambia los archivos de carpeta, recibe el Post de cuando se pulsa publicar
+        foreach ($post as $carpeta => $ficheros) {//Recorro todo el $_POST
+            if ($carpeta == 'enviar') {//Salto el campo del submit del formulario
                 continue;
             }
 
-            foreach ($ficheros as $fichero) {
-
+            foreach ($ficheros as $fichero) {//Recorro los arrays de cada carpeta
                 if (rename("descargas/uploads/$carpeta/$fichero", "descargas/downloads/$carpeta/$fichero")) {
                     funciones::escribeLog("Se publica $fichero en la carpeta $carpeta");
+                } else {
+                    funciones::escribeLog("Error al publicar $fichero en la carpeta $carpeta");
                 }
             }
         }
@@ -142,14 +140,14 @@ class funciones {
         if (!file_exists("logs")) {
             mkdir("logs", 0775);
             $msj = "Se ha creado la carpeta ficheros\n";
-            file_put_contents($file, $msj);
+            file_put_contents($file, $msj); //Esta funcion, abre, escribe y cierra
         }
 
         $fecha = date('d-m-Y', strtotime("now"));
         $hora = date('H:i:s', strtotime("now"));
         $log = "El día $fecha a las $hora: $mensaje\n";
 
-        file_put_contents($file, $log, FILE_APPEND); //Esta funcion, abre, escribe y cierra
+        file_put_contents($file, $log, FILE_APPEND);
     }
 
 }

@@ -32,6 +32,7 @@ empty($_GET['msj']) ? $msj = "" : $msj = $_GET['msj'];
                 </div>
                 <br>
                 <br>
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                 <input type="submit" value="subirFichero" name="enviar">
                 <input type="submit" value="subirAcceder" name="enviar">
                 <input type="submit" value="acceder" name="enviar">
